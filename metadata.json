@@ -1,0 +1,7 @@
+{
+  "name": "GAS POS Store - Google Apps Script POS & Inventory Systems",
+  "description": "গুগল অ্যাপস স্ক্রিপ্ট (Google Apps Script) ওয়েব অ্যাপ্লিকেশন সোর্স কোড ও কমপ্লিট পিওএস ইনভেন্টরি ম্যানেজমেন্ট সফটওয়্যার স্টোর। লাইভ ডেমো ও সহজ প্যাকেজ।",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
