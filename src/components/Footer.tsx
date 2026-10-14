@@ -71,9 +71,9 @@ export const Footer: React.FC = () => {
             </div>
             <div className="space-y-3 text-xs sm:text-sm text-slate-400 font-semibold">
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-emerald-400 shrink-0" />
-                <a href={`mailto:${SITE_CONFIG.email}`} className="hover:text-white truncate">
-                  {SITE_CONFIG.email}
+                <Phone className="w-4 h-4 text-emerald-400 shrink-0" />
+                <a href={`tel:${SITE_CONFIG.whatsappNumber}`} className="hover:text-white font-mono">
+                  সরাসরি কল: {SITE_CONFIG.displayPhone}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
@@ -82,13 +82,13 @@ export const Footer: React.FC = () => {
                   href={`https://wa.me/${SITE_CONFIG.whatsappNumber}`} 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-white"
+                  className="hover:text-white font-mono"
                 >
                   WhatsApp: {SITE_CONFIG.displayPhone}
                 </a>
               </div>
               <p className="text-[11px] text-slate-500 pt-1 font-medium">
-                সাপোর্ট সময়: {SITE_CONFIG.supportHours}
+                {SITE_CONFIG.supportHours}
               </p>
             </div>
           </div>

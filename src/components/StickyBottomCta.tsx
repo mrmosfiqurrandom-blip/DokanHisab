@@ -4,19 +4,23 @@ import { SITE_CONFIG } from '../data/siteConfig';
 
 interface StickyBottomCtaProps {
   onOpenOrderModal: () => void;
+  onNavigateDemos?: () => void;
 }
 
-export const StickyBottomCta: React.FC<StickyBottomCtaProps> = ({ onOpenOrderModal }) => {
+export const StickyBottomCta: React.FC<StickyBottomCtaProps> = ({ 
+  onOpenOrderModal,
+  onNavigateDemos 
+}) => {
   return (
     <div className="fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur-xl border-t border-slate-800 p-3 sm:hidden shadow-2xl">
       <div className="flex items-center gap-2">
-        <a
-          href="#demos"
-          className="flex-1 py-3 px-3 bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 transition-colors"
+        <button
+          onClick={onNavigateDemos}
+          className="flex-1 py-3 px-3 bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
         >
           <Play className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
           <span>ডেমো দেখুন</span>
-        </a>
+        </button>
 
         <button
           onClick={onOpenOrderModal}
@@ -27,7 +31,7 @@ export const StickyBottomCta: React.FC<StickyBottomCtaProps> = ({ onOpenOrderMod
         </button>
 
         <a
-          href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('আসসালামু আলাইকুম, আমি গুগল অ্যাপস স্ক্রিপ্ট পিওএস সফটওয়্যার সম্পর্কে জানতে চাই।')}`}
+          href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('আসসালামু আলাইকুম! DokanHisab থেকে পিওএস সফটওয়্যার সম্পর্কে জানতে চাই।')}`}
           target="_blank"
           rel="noopener noreferrer"
           className="p-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl flex items-center justify-center shadow-md shadow-emerald-600/30 active:scale-95"

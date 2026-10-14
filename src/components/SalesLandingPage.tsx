@@ -183,25 +183,35 @@ ${notes ? `• বিশেষ চাহিদা: ${notes}` : ''}
             <div className="text-left w-full sm:w-auto">
               <div className="flex items-center gap-2 text-xs font-black text-amber-400">
                 <Key className="w-3.5 h-3.5 text-amber-400" />
-                <span>লাইভ ডেমো ক্রেডেনশিয়াল:</span>
+                <span>লাইভ ডেমো এক্সেস:</span>
               </div>
               <div className="flex items-center gap-3 mt-1 text-xs font-mono font-bold">
-                <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-emerald-400">
-                  {currentApp.credentials.usernameLabel}: {currentApp.credentials.username}
-                </span>
-                <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-amber-300">
-                  {currentApp.credentials.passwordLabel}: {currentApp.credentials.password}
-                </span>
+                {currentApp.credentials?.username && (
+                  <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-emerald-400">
+                    {currentApp.credentials.usernameLabel || 'User'}: {currentApp.credentials.username}
+                  </span>
+                )}
+                {currentApp.credentials?.password ? (
+                  <span className="bg-slate-950 px-2 py-0.5 rounded border border-slate-800 text-amber-300">
+                    {currentApp.credentials.passwordLabel || 'Pass'}: {currentApp.credentials.password}
+                  </span>
+                ) : (
+                  <span className="bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-700/60 text-emerald-300 font-bold">
+                    সরাসরি ওপেন এক্সেস
+                  </span>
+                )}
               </div>
             </div>
 
             <div className="flex items-center gap-2 w-full sm:w-auto">
-              <button
-                onClick={() => handleCopy(`${currentApp.credentials.username} / ${currentApp.credentials.password}`, 'sales-cred')}
-                className="flex-1 sm:flex-none px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl transition-colors cursor-pointer"
-              >
-                {copiedKey === 'sales-cred' ? 'কপি হয়েছে' : 'কপি করুন'}
-              </button>
+              {currentApp.credentials && (
+                <button
+                  onClick={() => handleCopy(`${currentApp.credentials?.username || ''} / ${currentApp.credentials?.password || ''}`, 'sales-cred')}
+                  className="flex-1 sm:flex-none px-3 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-bold rounded-xl transition-colors cursor-pointer"
+                >
+                  {copiedKey === 'sales-cred' ? 'কপি হয়েছে' : 'কপি করুন'}
+                </button>
+              )}
               <a
                 href={currentApp.demoUrl}
                 target="_blank"

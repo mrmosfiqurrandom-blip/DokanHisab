@@ -127,59 +127,69 @@ export const DemoAppsSection: React.FC<DemoAppsSectionProps> = ({
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {/* User / ID Box */}
-                    <div className="bg-slate-900/90 rounded-xl p-3 border border-slate-700/80 flex items-center justify-between shadow-inner">
-                      <div className="flex items-center gap-2 truncate">
-                        <User className="w-4 h-4 text-slate-400 shrink-0" />
-                        <span className="text-xs text-slate-400 font-bold shrink-0">
-                          {app.credentials.usernameLabel}:
-                        </span>
-                        <code className="text-xs font-mono font-bold text-emerald-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-700 truncate">
-                          {app.credentials.username}
-                        </code>
-                      </div>
-                      <button
-                        onClick={() => handleCopy(app.credentials.username, `${app.id}-user`)}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
-                        title="কপি করুন"
-                      >
-                        {copiedKey === `${app.id}-user` ? (
-                          <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-bold">
-                            <Check className="w-3.5 h-3.5" /> কপিড
-                          </span>
-                        ) : (
-                          <Copy className="w-3.5 h-3.5" />
-                        )}
-                      </button>
+                  {!app.requiresAuth ? (
+                    <div className="flex items-center justify-between text-xs font-bold text-emerald-300 bg-slate-900/90 p-3 rounded-xl border border-emerald-700/50">
+                      <span>সরাসরি ওপেন এক্সেস — কোনো আইডি বা পাসওয়ার্ড প্রয়োজন নেই</span>
                     </div>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {/* User / ID Box */}
+                      {app.credentials?.username && (
+                        <div className="bg-slate-900/90 rounded-xl p-3 border border-slate-700/80 flex items-center justify-between shadow-inner">
+                          <div className="flex items-center gap-2 truncate">
+                            <User className="w-4 h-4 text-slate-400 shrink-0" />
+                            <span className="text-xs text-slate-400 font-bold shrink-0">
+                              {app.credentials.usernameLabel || 'User'}:
+                            </span>
+                            <code className="text-xs font-mono font-bold text-emerald-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-700 truncate">
+                              {app.credentials.username}
+                            </code>
+                          </div>
+                          <button
+                            onClick={() => handleCopy(app.credentials?.username || '', `${app.id}-user`)}
+                            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
+                            title="কপি করুন"
+                          >
+                            {copiedKey === `${app.id}-user` ? (
+                              <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-bold">
+                                <Check className="w-3.5 h-3.5" /> কপিড
+                              </span>
+                            ) : (
+                              <Copy className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                        </div>
+                      )}
 
-                    {/* Password Box */}
-                    <div className="bg-slate-900/90 rounded-xl p-3 border border-slate-700/80 flex items-center justify-between shadow-inner">
-                      <div className="flex items-center gap-2 truncate">
-                        <Key className="w-4 h-4 text-slate-400 shrink-0" />
-                        <span className="text-xs text-slate-400 font-bold shrink-0">
-                          {app.credentials.passwordLabel}:
-                        </span>
-                        <code className="text-xs font-mono font-bold text-amber-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-700 truncate">
-                          {app.credentials.password}
-                        </code>
-                      </div>
-                      <button
-                        onClick={() => handleCopy(app.credentials.password, `${app.id}-pass`)}
-                        className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
-                        title="কপি করুন"
-                      >
-                        {copiedKey === `${app.id}-pass` ? (
-                          <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-bold">
-                            <Check className="w-3.5 h-3.5" /> কপিড
-                          </span>
-                        ) : (
-                          <Copy className="w-3.5 h-3.5" />
-                        )}
-                      </button>
+                      {/* Password Box */}
+                      {app.credentials?.password && (
+                        <div className="bg-slate-900/90 rounded-xl p-3 border border-slate-700/80 flex items-center justify-between shadow-inner">
+                          <div className="flex items-center gap-2 truncate">
+                            <Key className="w-4 h-4 text-slate-400 shrink-0" />
+                            <span className="text-xs text-slate-400 font-bold shrink-0">
+                              {app.credentials.passwordLabel || 'Pass'}:
+                            </span>
+                            <code className="text-xs font-mono font-bold text-amber-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-700 truncate">
+                              {app.credentials.password}
+                            </code>
+                          </div>
+                          <button
+                            onClick={() => handleCopy(app.credentials?.password || '', `${app.id}-pass`)}
+                            className="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer shrink-0 ml-2"
+                            title="কপি করুন"
+                          >
+                            {copiedKey === `${app.id}-pass` ? (
+                              <span className="flex items-center gap-1 text-[11px] text-emerald-400 font-bold">
+                                <Check className="w-3.5 h-3.5" /> কপিড
+                              </span>
+                            ) : (
+                              <Copy className="w-3.5 h-3.5" />
+                            )}
+                          </button>
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* Features List */}

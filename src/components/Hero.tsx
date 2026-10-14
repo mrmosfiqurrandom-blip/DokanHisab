@@ -4,9 +4,10 @@ import { TRUST_STATS } from '../data/siteConfig';
 
 interface HeroProps {
   onOpenOrderModal: (packageId?: 'basic' | 'medium' | 'premium') => void;
+  onViewDemos: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
+export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal, onViewDemos }) => {
   return (
     <section className="relative overflow-hidden bg-slate-950 text-white pt-12 pb-20 border-b border-slate-800/80">
       {/* Dynamic ambient color gradients */}
@@ -31,7 +32,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
             </span>
-            <span>গুগল অ্যাপস স্ক্রিপ্ট ও গুগল শিট ক্লাউড টেকনোলজি</span>
+            <span>গুগল অ্যাপস স্ক্রিপ্ট ও ক্লাউড টেকনোলজি</span>
             <span className="text-slate-600">|</span>
             <span className="text-amber-300 font-extrabold">০৳ মাসিক ফি</span>
           </div>
@@ -54,13 +55,13 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal }) => {
 
           {/* Action Buttons with high colorful contrast */}
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href="#demos"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm sm:text-base font-extrabold text-slate-950 bg-gradient-to-r from-amber-400 via-amber-300 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 rounded-2xl shadow-xl shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer"
+            <button
+              onClick={onViewDemos}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 text-sm sm:text-base font-extrabold text-slate-950 bg-gradient-to-r from-emerald-400 via-teal-300 to-emerald-400 hover:from-emerald-300 hover:to-teal-200 rounded-2xl shadow-xl shadow-emerald-500/25 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer"
             >
               <Play className="w-5 h-5 fill-slate-950 text-slate-950" />
-              <span>লাইভ ডেমো টেস্ট করুন (২টি ডেমো)</span>
-            </a>
+              <span>৫টি লাইভ ডেমো দেখুন (ওপেন ও সিকিউরড)</span>
+            </button>
 
             <a
               href="#packages"

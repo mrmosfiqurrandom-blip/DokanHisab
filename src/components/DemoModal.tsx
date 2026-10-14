@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, ExternalLink, Copy, Check, Key, User, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { X, ExternalLink, Copy, Check, Key, User, ShieldCheck, CheckCircle2, Zap } from 'lucide-react';
 import { DemoApp } from '../data/appsData';
 
 interface DemoModalProps {
@@ -46,52 +46,65 @@ export const DemoModal: React.FC<DemoModalProps> = ({ app, onClose, onOrderThisA
 
           {/* Credentials Card */}
           <div className="bg-slate-950 rounded-2xl p-4.5 border border-amber-500/30">
-            <div className="flex items-center gap-2 text-xs font-bold text-amber-300 mb-3">
-              <Key className="w-4 h-4 text-amber-400" />
-              <span>লগইন এক্সেস কোড (কপি করুন):</span>
-            </div>
-
-            <div className="space-y-2.5">
-              <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <User className="w-4 h-4 text-slate-400" />
-                  <span className="text-xs text-slate-400 font-bold">{app.credentials.usernameLabel}:</span>
-                  <code className="text-xs font-mono font-bold text-emerald-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-                    {app.credentials.username}
-                  </code>
-                </div>
-                <button
-                  onClick={() => handleCopy(app.credentials.username, 'modal-user')}
-                  className="text-slate-400 hover:text-white text-xs font-bold cursor-pointer"
-                >
-                  {copiedKey === 'modal-user' ? (
-                    <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5" /> কপিড</span>
-                  ) : (
-                    <Copy className="w-4 h-4" />
-                  )}
-                </button>
+            {!app.requiresAuth ? (
+              <div className="flex items-center gap-2.5 text-xs font-bold text-emerald-300 bg-emerald-950/40 p-3 rounded-xl border border-emerald-800/40">
+                <Zap className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>সরাসরি ওপেন এক্সেস — কোনো ইউজার আইডি বা পাসওয়ার্ড লাগবে না। নিচের বাটনে ক্লিক করে সরাসরি টেস্ট করুন।</span>
               </div>
-
-              <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
-                <div className="flex items-center gap-2.5">
-                  <Key className="w-4 h-4 text-slate-400" />
-                  <span className="text-xs text-slate-400 font-bold">{app.credentials.passwordLabel}:</span>
-                  <code className="text-xs font-mono font-bold text-amber-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-                    {app.credentials.password}
-                  </code>
+            ) : (
+              <div>
+                <div className="flex items-center gap-2 text-xs font-bold text-amber-300 mb-3">
+                  <Key className="w-4 h-4 text-amber-400" />
+                  <span>লগইন এক্সেস কোড (কপি করুন):</span>
                 </div>
-                <button
-                  onClick={() => handleCopy(app.credentials.password, 'modal-pass')}
-                  className="text-slate-400 hover:text-white text-xs font-bold cursor-pointer"
-                >
-                  {copiedKey === 'modal-pass' ? (
-                    <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5" /> কপিড</span>
-                  ) : (
-                    <Copy className="w-4 h-4" />
+
+                <div className="space-y-2.5">
+                  {app.credentials?.username && (
+                    <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <User className="w-4 h-4 text-slate-400" />
+                        <span className="text-xs text-slate-400 font-bold">{app.credentials.usernameLabel || 'Username'}:</span>
+                        <code className="text-xs font-mono font-bold text-emerald-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+                          {app.credentials.username}
+                        </code>
+                      </div>
+                      <button
+                        onClick={() => handleCopy(app.credentials?.username || '', 'modal-user')}
+                        className="text-slate-400 hover:text-white text-xs font-bold cursor-pointer"
+                      >
+                        {copiedKey === 'modal-user' ? (
+                          <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5" /> কপিড</span>
+                        ) : (
+                          <Copy className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
                   )}
-                </button>
+
+                  {app.credentials?.password && (
+                    <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
+                      <div className="flex items-center gap-2.5">
+                        <Key className="w-4 h-4 text-slate-400" />
+                        <span className="text-xs text-slate-400 font-bold">{app.credentials.passwordLabel || 'Password'}:</span>
+                        <code className="text-xs font-mono font-bold text-amber-300 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+                          {app.credentials.password}
+                        </code>
+                      </div>
+                      <button
+                        onClick={() => handleCopy(app.credentials?.password || '', 'modal-pass')}
+                        className="text-slate-400 hover:text-white text-xs font-bold cursor-pointer"
+                      >
+                        {copiedKey === 'modal-pass' ? (
+                          <span className="text-emerald-400 flex items-center gap-1"><Check className="w-3.5 h-3.5" /> কপিড</span>
+                        ) : (
+                          <Copy className="w-4 h-4" />
+                        )}
+                      </button>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Test checklist */}

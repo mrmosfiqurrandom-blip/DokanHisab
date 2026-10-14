@@ -1,26 +1,22 @@
 import React from 'react';
-import { ShoppingBag, MessageCircle, Sparkles } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Layers, Home, Phone } from 'lucide-react';
 import { SITE_CONFIG } from '../data/siteConfig';
 
 interface NavbarProps {
   onOpenOrderModal: (packageId?: 'basic' | 'medium' | 'premium', appId?: string) => void;
-  onOpenSalesPage: () => void;
-  activeView: 'home' | 'sales';
+  onNavigate: (view: 'home' | 'demos' | 'payment') => void;
+  activeView: 'home' | 'demos' | 'payment';
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenSalesPage, activeView }) => {
+export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onNavigate, activeView }) => {
   return (
-    <header className="sticky top-0 z-40 bg-slate-950/85 backdrop-blur-xl border-b border-slate-800/80 transition-all">
+    <header className="sticky top-0 z-40 bg-slate-950/90 backdrop-blur-xl border-b border-slate-800/80 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-18">
           {/* Logo & Brand: DokanHisab */}
           <div className="flex items-center gap-3">
             <button 
-              onClick={() => {
-                if (activeView === 'sales') {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-                }
-              }} 
+              onClick={() => onNavigate('home')} 
               className="flex items-center gap-3 group text-left cursor-pointer"
             >
               <div className="relative">
@@ -47,76 +43,69 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenSalesPag
                   </span>
                 </div>
                 <p className="text-[11px] font-bold text-slate-400 hidden sm:block">
-                  পিওএস ও ইনভেন্টরি ম্যানেজমেন্ট
+                  গুগল ক্লাউড পিওএস সফটওয়্যার
                 </p>
               </div>
             </button>
           </div>
 
-          {/* Clean Essential Menus */}
-          <nav className="hidden md:flex items-center gap-7 text-sm font-bold text-slate-300">
-            {activeView === 'sales' ? (
-              <button
-                onClick={() => {
-                  window.location.hash = '';
-                  window.location.reload();
-                }}
-                className="hover:text-emerald-400 transition-colors py-1 cursor-pointer font-black text-amber-300"
-              >
-                ← হোম স্টোর
-              </button>
-            ) : (
-              <>
-                <a 
-                  href="#demos" 
-                  className="hover:text-emerald-400 transition-colors py-1"
-                >
-                  লাইভ ডেমো
-                </a>
-                <a 
-                  href="#packages" 
-                  className="hover:text-emerald-400 transition-colors py-1"
-                >
-                  প্যাকেজ সমূহ
-                </a>
-                <a 
-                  href="#savings" 
-                  className="hover:text-amber-400 transition-colors py-1"
-                >
-                  সাশ্রয় হিসাব
-                </a>
-              </>
-            )}
-
-            {/* Dedicated Sales Landing Page Link */}
+          {/* Clean Menu: Only Home and Live Demos (as requested) */}
+          <nav className="hidden md:flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-2xl border border-slate-800">
             <button
-              onClick={onOpenSalesPage}
-              className={`px-3 py-1.5 rounded-xl text-xs font-black transition-all cursor-pointer flex items-center gap-1.5 ${
-                activeView === 'sales'
-                  ? 'bg-amber-400 text-slate-950 shadow-md'
-                  : 'bg-slate-900 hover:bg-slate-800 text-amber-300 border border-amber-500/40 hover:border-amber-400'
+              onClick={() => onNavigate('home')}
+              className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-1.5 ${
+                activeView === 'home'
+                  ? 'bg-slate-800 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
-              <span>🔥 সেলস ল্যান্ডিং পেজ</span>
+              <Home className="w-3.5 h-3.5" />
+              <span>হোম</span>
+            </button>
+
+            <button
+              onClick={() => onNavigate('demos')}
+              className={`px-4 py-1.5 rounded-xl text-xs sm:text-sm font-extrabold transition-all cursor-pointer flex items-center gap-1.5 relative ${
+                activeView === 'demos'
+                  ? 'bg-emerald-500 text-slate-950 shadow-md font-black'
+                  : 'text-emerald-400 hover:text-emerald-300 hover:bg-slate-800/60'
+              }`}
+            >
+              <Layers className="w-3.5 h-3.5" />
+              <span>ডেমো প্রজেক্টস</span>
+              <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono font-bold ${
+                activeView === 'demos' ? 'bg-slate-950 text-emerald-300' : 'bg-emerald-950 text-emerald-300 border border-emerald-700/50'
+              }`}>
+                ৫টি লাইভ
+              </span>
             </button>
           </nav>
 
-          {/* Action CTAs */}
+          {/* Action CTAs: Direct Call & WhatsApp & Order */}
           <div className="flex items-center gap-2.5">
             <a
-              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('আসসালামু আলাইকুম! DokanHisab থেকে পিওএস সফটওয়্যার ও সোর্স কোড সম্পর্কে জানতে চাই।')}`}
+              href={`tel:${SITE_CONFIG.whatsappNumber}`}
+              className="hidden lg:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-bold text-slate-300 hover:text-white bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl transition-all"
+              title="সরাসরি ফোন কল"
+            >
+              <Phone className="w-3.5 h-3.5 text-amber-400" />
+              <span className="font-mono">{SITE_CONFIG.displayPhone}</span>
+            </a>
+
+            <a
+              href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent('আসসালামু আলাইকুম! DokanHisab থেকে পিওএস সফটওয়্যার সম্পর্কে জানতে চাই।')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-2 text-xs sm:text-sm font-bold text-emerald-300 bg-emerald-950/70 hover:bg-emerald-900/80 border border-emerald-600/50 rounded-xl transition-all shadow-sm active:scale-95"
-              title="হোয়াটসঅ্যাপে যোগাযোগ"
+              title="হোয়াটসঅ্যাপে চ্যাট করুন"
             >
               <MessageCircle className="w-4 h-4 text-emerald-400" />
-              <span className="hidden sm:inline font-mono font-bold">+8801770607870</span>
+              <span className="hidden sm:inline font-mono font-bold">WhatsApp</span>
             </a>
 
             <button
               onClick={() => onOpenOrderModal('medium')}
-              className="inline-flex items-center gap-1.5 px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-black text-slate-950 bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-amber-500 rounded-xl shadow-lg shadow-amber-500/20 active:scale-95 cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-black text-slate-950 bg-gradient-to-r from-amber-300 via-amber-400 to-yellow-400 hover:from-amber-400 hover:to-yellow-500 rounded-xl shadow-lg shadow-amber-500/20 active:scale-95 cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4 text-slate-950" />
               <span>অর্ডার করুন</span>
@@ -127,4 +116,3 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onOpenSalesPag
     </header>
   );
 };
-

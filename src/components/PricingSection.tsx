@@ -145,7 +145,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPackage 
                     onClick={() => onSelectPackage(pkg.id)}
                     className={`w-full py-3.5 px-4 rounded-xl text-sm flex items-center justify-center gap-2 transition-all hover:scale-[1.02] active:scale-95 cursor-pointer ${cardStyle.btn}`}
                   >
-                    <span>এই প্যাকেজটি অর্ডার করুন</span>
+                    <span>বিকাশে পেমেন্ট ও অর্ডার করুন</span>
                     <ArrowRight className="w-4 h-4" />
                   </button>
                 </div>

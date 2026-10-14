@@ -8,15 +8,13 @@ export const SITE_CONFIG = {
   brandShort: 'DokanHisab',
   brandBangla: 'দোকানহিসাব',
   tagline: 'গুগল ক্লাউড ও স্প্রেডশিট চালিত কমপ্লিট রিটেইল পিওএস ও ইনভেন্টরি ম্যানেজমেন্ট',
-  email: 'mr.mosfiqur.random@gmail.com',
   whatsappNumber: '8801770607870',
   displayPhone: '+880 1770-607870',
-  supportHours: 'সকাল ৯:০০ - রাত ১১:০০ (প্রতিদিন)',
+  supportHours: 'সকাল ৯:০০ - রাত ১১:০০ (ফোন কল ও হোয়াটসঅ্যাপ সাপোর্ট)',
+  bkashNumber: '01770-607870',
+  bkashRawNumber: '01770607870',
   paymentMethods: [
-    { name: 'bKash', number: '01770-607870', type: 'Personal / Send Money' },
-    { name: 'Nagad', number: '01770-607870', type: 'Personal / Send Money' },
-    { name: 'Rocket', number: '01770-607870-1', type: 'Personal / Send Money' },
-    { name: 'Bank Transfer', number: 'Islami Bank / City Bank', type: 'Direct Account' },
+    { name: 'bKash Personal', number: '01770-607870', type: 'Send Money (সেন্ড মানি)' },
   ]
 };
 
@@ -35,7 +33,7 @@ export const FAQ_LIST: FaqItem[] = [
   },
   {
     questionBn: 'পেমেন্ট কিভাবে করতে হবে এবং ডেলিভারি কিভাবে পাবো?',
-    answerBn: 'বিকাশ, নগদ, রকেট বা ব্যাংক ট্রান্সফারের মাধ্যমে পেমেন্ট করতে পারবেন। বেসিক প্যাকেজ কিনলে পেমেন্ট ভেরিফাই হওয়ার সাথে সাথেই সোর্স কোড ও ডকুমেন্টেশনের ড্রাইভ লিংক পেয়ে যাবেন। আর মিডিয়াম বা প্রিমিয়াম প্যাকেজে আমাদের এক্সপার্ট টিম AnyDesk বা Google Meet-এর মাধ্যমে আপনার স্ক্রিন শেয়ার করে আপনার জিমেইলে কমপ্লিট সেটআপ ও বুঝিয়ে দেবে।'
+    answerBn: 'আমাদের নির্ধারিত বিকাশ পার্সোনাল নাম্বারে (01770-607870) সেন্ড মানি করে ট্রানজেকশন আইডি (TrxID) দিয়ে পেমেন্ট ভেরিফাই করলেই আপনি সোর্স কোড ও ডকুমেন্টেশনের ড্রাইভ এক্সেস পেয়ে যাবেন। আর মিডিয়াম বা প্রিমিয়াম প্যাকেজে আমাদের টিম AnyDesk বা Google Meet-এর মাধ্যমে আপনার স্ক্রিন শেয়ার করে সেটআপ সম্পন্ন করে দেবে।'
   },
   {
     questionBn: 'গুগল শিটে কি হাজার হাজার বিক্রয়ের ডাটা রাখা সম্ভব?',

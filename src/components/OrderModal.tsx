@@ -297,64 +297,42 @@ ${notes ? `• বিশেষ চাহিদা/নোট: ${notes}` : ''}
           </div>
 
           {/* Step 4: Payment Methods Info */}
-          <div className="bg-slate-950 rounded-2xl p-4.5 border border-slate-800">
+          <div className="bg-slate-950 rounded-2xl p-4.5 border border-pink-500/30">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-black text-slate-200 uppercase tracking-wider">
-                ৪. পেমেন্ট তথ্য ও পদ্ধতি:
+                ৪. পেমেন্ট তথ্য (বিকাশ পার্সোনাল):
               </span>
-              <span className="text-xs text-emerald-400 font-bold">
-                বিকাশ / নগদ / রকেট
+              <span className="text-xs text-pink-400 font-bold">
+                শুধুমাত্র বিকাশ পার্সোনাল (Send Money)
               </span>
             </div>
             <p className="text-xs text-slate-400 font-medium mb-3">
-              অর্ডারের পর নিচের নম্বরে সেন্ড মানি করে WhatsApp-এ স্ক্রিনশট বা ট্রানজেকশন আইডি দিলে তাৎক্ষণিক সেটআপ প্রসেস শুরু হবে।
+              অর্ডারের পর নিচের বিকাশ নাম্বারে সেন্ড মানি করে WhatsApp-এ ট্রানজেকশন আইডি (TrxID) দিলে তাৎক্ষণিক সোর্স কোড এক্সেস ও সেটআপ বুঝিয়ে দেওয়া হবে।
             </p>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-              <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
-                <div>
-                  <div className="font-black text-pink-400">bKash Personal</div>
-                  <div className="font-mono text-white text-xs font-bold">01770-607870</div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => handleCopyPaymentNumber('01770607870')}
-                  className="text-slate-400 hover:text-white p-1 cursor-pointer"
-                  title="কপি করুন"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                </button>
+            <div className="bg-slate-900 p-3.5 rounded-xl border border-pink-500/30 flex items-center justify-between">
+              <div>
+                <div className="font-black text-pink-400 text-sm">bKash Personal (সেন্ড মানি)</div>
+                <div className="font-mono text-white text-base font-black tracking-wider mt-0.5">01770-607870</div>
               </div>
-
-              <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between">
-                <div>
-                  <div className="font-black text-orange-400">Nagad Personal</div>
-                  <div className="font-mono text-white text-xs font-bold">01770-607870</div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => handleCopyPaymentNumber('01770607870')}
-                  className="text-slate-400 hover:text-white p-1 cursor-pointer"
-                  title="কপি করুন"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                </button>
-              </div>
-
-              <div className="bg-slate-900 p-3 rounded-xl border border-slate-800 flex items-center justify-between col-span-2 sm:col-span-1">
-                <div>
-                  <div className="font-black text-purple-400">Rocket Personal</div>
-                  <div className="font-mono text-white text-xs font-bold">01770-607870-1</div>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => handleCopyPaymentNumber('017706078701')}
-                  className="text-slate-400 hover:text-white p-1 cursor-pointer"
-                  title="কপি করুন"
-                >
-                  <Copy className="w-3.5 h-3.5" />
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => handleCopyPaymentNumber('01770607870')}
+                className="px-3 py-1.5 bg-pink-600 hover:bg-pink-500 text-white rounded-lg text-xs font-black flex items-center gap-1 cursor-pointer transition-colors shadow-sm"
+                title="কপি করুন"
+              >
+                {copiedPayment ? (
+                  <>
+                    <Check className="w-3.5 h-3.5" />
+                    <span>কপি হয়েছে</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>কপি</span>
+                  </>
+                )}
+              </button>
             </div>
 
             {copiedPayment && (
