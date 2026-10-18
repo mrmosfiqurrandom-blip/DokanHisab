@@ -7,11 +7,11 @@ export interface DemoApp {
   description: string;
   demoUrl: string;
   requiresAuth: boolean;
-  credentials?: {
-    usernameLabel?: string;
-    username?: string;
-    passwordLabel?: string;
-    password?: string;
+  credentials: {
+    usernameLabel: string;
+    username: string;
+    passwordLabel: string;
+    password: string;
   };
   features: string[];
   techStack: string[];
@@ -20,131 +20,19 @@ export interface DemoApp {
     badgeColor: string;
     accentColor: string;
     btnClass: string;
-    icon: 'Zap' | 'Store' | 'Layers' | 'Shirt' | 'BatteryCharging';
+    icon: 'Truck' | 'Cpu' | 'Store' | 'Shirt';
   };
 }
 
 export const DEMO_APPS: DemoApp[] = [
   {
-    id: 'smart-cloud-billing',
-    name: 'Smart Cloud Billing & POS',
-    category: 'সরাসরি ওপেন এক্সেস ওয়েব অ্যাপ',
-    categoryEn: 'Instant Open Access Billing System',
-    tagline: 'লগইন ঝামেলা ছাড়া সরাসরি ওপেন এক্সেস স্মার্ট সেলস ও ইনভয়েস জেনারেটর',
-    description: 'কোনো ইউজার আইডি বা পাসওয়ার্ড ছাড়াই সরাসরি ভিজিট করে টেস্ট করার উপযুক্ত হাই-স্পিড গুগল অ্যাপস স্ক্রিপ্ট বিলিং সিস্টেম। দ্রুত ক্যাশ মেমো, স্টক কাউন্ট ও সেলস হিস্ট্রি।',
-    demoUrl: 'https://script.google.com/macros/s/AKfycbzT5v6byi1FOmz4pkYeNmsCz1s4dZspqltpguYPX3t89cWNnDcYM14vsvtg3XoFp7UcMA/exec',
-    requiresAuth: false,
-    features: [
-      'সরাসরি ওপেন এক্সেস — কোনো আইডি বা পাসওয়ার্ড প্রয়োজন নেই',
-      '১-ক্লিকে ফাস্ট ক্যাশ মেমো ও কাস্টমার ইনভয়েস প্রিন্টিং',
-      'সহজ গুগল শিট ডাটাবেস অটো-সিঙ্ক ও হিস্ট্রি',
-      'মোবাইল ও পিসিতে ইনস্ট্যান্ট রেসপনসিভ ইউজার ইন্টারফেস'
-    ],
-    techStack: ['Google Apps Script', 'Google Sheets DB', 'Vanilla JS', 'Tailwind CSS'],
-    bestFor: ['জেনারেল রিটেইল স্টোর', 'মুদি ও ডিপার্টমেন্টাল শপ', 'স্টেশনারি ও কসমেটিক্স শপ'],
-    previewTheme: {
-      badgeColor: 'border-emerald-500/40 text-emerald-300 bg-emerald-950/60',
-      accentColor: 'text-emerald-400',
-      btnClass: 'bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 shadow-emerald-500/25',
-      icon: 'Zap',
-    }
-  },
-  {
-    id: 'retail-inventory-pos',
-    name: 'Retail Store & Inventory Manager',
-    category: 'পাসওয়ার্ড প্রোটেক্টেড পিওএস',
-    categoryEn: 'Password Protected Retail Manager',
-    tagline: 'পাসওয়ার্ড সিকিউরিটি সহ আধুনিক স্টোর ও ইনভেন্টরি ম্যানেজমেন্ট সিস্টেম',
-    description: 'দোকানের ক্যাশিয়ার ও সেলস টিমের জন্য তৈরি সিকিউরড গুগল অ্যাপস স্ক্রিপ্ট অ্যাপ্লিকেশন। স্টক অ্যালার্ট, বারকোড স্ক্যানিং ও ডেইলি সেলস সামারি।',
-    demoUrl: 'https://script.google.com/macros/s/AKfycbzwstAmVU0s5DFKt22tICz9_lJy7irNu-6MToj7N8bCwxWDwAC2j-Mwlk7H57nJM302cQ/exec',
-    requiresAuth: true,
-    credentials: {
-      passwordLabel: 'Password',
-      password: 'Random@#$12345',
-    },
-    features: [
-      'মাস্টার পাসওয়ার্ড সিকিউরিটি প্রোটেকশন',
-      'প্রোডাক্ট স্টক কোয়ান্টিটি ও লো-স্টক নোটিফিকেশন',
-      'ক্যাশ ও অনলাইন পেমেন্ট মেথড সাপোর্ট',
-      'দৈনিক ও মাসিক লাভ-ক্ষতি ক্যালকুলেটর'
-    ],
-    techStack: ['Google Apps Script', 'Google Sheets DB', 'Modern HTML5/JS'],
-    bestFor: ['সুপারশপ ও মিনিমার্ট', 'ইলেকট্রনিক্স এক্সেসরিজ', 'হোলসেল ও পাইকারি বিক্রেতা'],
-    previewTheme: {
-      badgeColor: 'border-cyan-500/40 text-cyan-300 bg-cyan-950/60',
-      accentColor: 'text-cyan-400',
-      btnClass: 'bg-gradient-to-r from-cyan-500 to-blue-500 text-slate-950 shadow-cyan-500/25',
-      icon: 'Store',
-    }
-  },
-  {
-    id: 'enterprise-pos-ledger',
-    name: 'Enterprise POS & Due Ledger',
-    category: 'কমপ্লিট রোল-বেসড পিওএস ও লেজার',
-    categoryEn: 'Full RBAC Enterprise POS',
-    tagline: 'অ্যাডমিন ইউজারনেম ও পাসওয়ার্ড ভিত্তিক প্রফেশনাল পিওএস ও বাকির খাতা',
-    description: 'উন্নত কাস্টমার লেজার, বাকির খাতা, সাপ্লায়ার হিসাব এবং রোল-বেসড কন্ট্রোল সহ গুগল ক্লাউড এন্টারপ্রাইজ রিটেইল সলিউশন।',
-    demoUrl: 'https://script.google.com/macros/s/AKfycbyXfCyOJ7Y8r2logzZ2KhXRJhPFPTXjTIhz1qJHEEBnVQ0Qz5Y7YLH2ZYJSUyoiPAZJHA/exec',
-    requiresAuth: true,
-    credentials: {
-      usernameLabel: 'Username',
-      username: 'admin',
-      passwordLabel: 'Password',
-      password: 'Random@#$12345',
-    },
-    features: [
-      'সম্পূর্ণ অ্যাডমিন ও ইউজার রোল অথেন্টিকেশন',
-      'কাস্টমার ওয়াইজ বাকির খাতা ও অটো ব্যালেন্স ট্র্যাকিং',
-      'সাপ্লায়ার পারচেজ ও পেমেন্ট হিস্ট্রি লেজার',
-      'থার্মাল পিওএস রসিদ ও A4 ইনভয়েস প্রিন্ট'
-    ],
-    techStack: ['Google Apps Script', 'Google Sheets DB', 'Tailwind', 'Secure Auth API'],
-    bestFor: ['বড় পাইকারি ও খুচরা দোকান', 'হার্ডওয়্যার ও স্যানিটারি শপ', 'ডিলারশিপ ও ডিস্ট্রিবিউটর'],
-    previewTheme: {
-      badgeColor: 'border-purple-500/40 text-purple-300 bg-purple-950/60',
-      accentColor: 'text-purple-400',
-      btnClass: 'bg-gradient-to-r from-purple-500 to-indigo-500 text-white shadow-purple-500/25',
-      icon: 'Layers',
-    }
-  },
-  {
-    id: 'fashion-garments-pos',
-    name: 'Fashion Garments POS',
-    category: 'পোশাক, গার্মেন্টস ও বুটিক ইনভেন্টরি',
-    categoryEn: 'Fashion & Garments Retail POS',
-    tagline: 'পোশাকের সাইজ, কালার ভ্যারিয়েন্ট ও বারকোড ভিত্তিক অটোমেটেড বিলিং ও স্টক সিস্টেম',
-    description: 'ক্লথিং শোরুম, বুটিক শপ, গার্মেন্টস রিটেইল ও জুতার দোকানের জন্য বিশেষায়িত গুগল অ্যাপস স্ক্রিপ্ট পিওএস। এতে রয়েছে সাইজ ও কালার ভ্যারিয়েন্ট, ইনস্ট্যান্ট বারকোড স্ক্যান, কাস্টমার ডিউ লেজার এবং থার্মাল রিসিপ্ট প্রিন্ট।',
-    demoUrl: 'https://script.google.com/macros/s/AKfycbxzg1q311ERkeFJ3U7zc9LllYNaAMOLByp8dbH5Dorw0TE7Sx9YLJ3pScvSAwwxV3s_FA/exec',
-    requiresAuth: true,
-    credentials: {
-      usernameLabel: 'Login',
-      username: 'Admin',
-      passwordLabel: 'PIN',
-      password: '1234',
-    },
-    features: [
-      'সাইজ ও কালার ভ্যারিয়েন্ট স্টক ট্র্যাকিং (S, M, L, XL, XXL)',
-      'বারকোড / কিউআর কোড স্ক্যানার ও লেবেল প্রিন্টার সাপোর্ট',
-      'ইনস্ট্যান্ট থার্মাল ক্যাশ মেমো প্রিন্ট (58mm / 80mm POS)',
-      'কাস্টমার বাকির খাতা ও এসএমএস ইনভয়েস ফরম্যাট'
-    ],
-    techStack: ['Google Apps Script', 'Google Sheets DB', 'HTML5/Tailwind', 'RESTful API'],
-    bestFor: ['গার্মেন্টস ও পোশাক শোরুম', 'লেডিস ও জেন্টস বুটিক শপ', 'জুতার দোকান (Footwear)'],
-    previewTheme: {
-      badgeColor: 'border-amber-500/40 text-amber-300 bg-amber-950/60',
-      accentColor: 'text-amber-400',
-      btnClass: 'bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 shadow-amber-500/25',
-      icon: 'Shirt',
-    }
-  },
-  {
-    id: 'janani-battery-pos',
-    name: 'M/S Janani Battery House POS',
-    category: 'ব্যাটারি, আইপিএস, ইলেকট্রনিক্স ও অটো পার্টস',
-    categoryEn: 'Battery, Electronics & Auto Spares POS',
-    tagline: 'ব্যাটারি সিরিয়াল নম্বর, ওয়ারেন্টি ট্র্যাকিং ও সাপ্লায়ার-কাস্টমার লেজার পিওএস',
-    description: 'ব্যাটারি দোকান, আইপিএস শোরুম, ইলেকট্রনিক্স ও অটোমোটিভ পার্টস শপের জন্য সম্পূর্ণ সমাধান। ব্যাটারির স্বতন্ত্র সিরিয়াল নম্বর ট্র্যাকিং, ওয়ারেন্টি ক্লেইম রেজিস্টার এবং পুরোনো ব্যাটারি এক্সচেঞ্জ হিসাব।',
-    demoUrl: 'https://script.google.com/macros/s/AKfycbwbtEyntJDadPaXrDQnAIaLiXorJ_GzDogIbKtHwiUQZw8ip9L6ANgpH8W-gRNIleFGVg/exec',
+    id: 'dealership-management-system',
+    name: 'ডিলারশিপ ম্যানেজমেন্ট সিস্টেম',
+    category: 'ডিলারশিপ ও ডিস্ট্রিবিউশন ইনভেন্টরি',
+    categoryEn: 'Dealership & Distribution Management',
+    tagline: 'ডিলার ও পাইকারি ডিস্ট্রিবিউটরদের জন্য স্টক, সাপ্লায়ার ও কাস্টমার লেজার অটোমেশন',
+    description: 'ডিলারশিপ, হোলসেল ডিস্ট্রিবিউশন ও বড় গুদামের চালান, ক্যাশ/বাকির হিসাব, ব্যাংক ট্রানজেকশন ও লাভ-ক্ষতি সহজে পরিচালনার জন্য প্রফেশনাল গুগল অ্যাপস স্ক্রিপ্ট সমাধান।',
+    demoUrl: 'https://script.google.com/macros/s/AKfycby76f2Em4dLFYF0orBQLD6exPFXQbQc_W0K1JeV6H7Ul1NdXHmOdADounTKMfCUzMz4/exec',
     requiresAuth: true,
     credentials: {
       usernameLabel: 'User',
@@ -153,18 +41,108 @@ export const DEMO_APPS: DemoApp[] = [
       password: 'Random@#$12345',
     },
     features: [
-      'প্রতিটি ব্যাটারির ইউনিক সিরিয়াল নম্বর ও বারকোড ট্র্যাকিং',
-      'ওয়ারেন্টি পিরিয়ড ও গ্যারান্টি কার্ড স্বয়ংক্রিয় ম্যানেজমেন্ট',
-      'পুরোনো ব্যাটারি এক্সচেঞ্জ (Scrap/Old Battery) হিসাব',
-      'সাপ্লায়ার ও কাস্টমার কমপ্লিট লেজার / বাকির খাতা'
+      'ডিলারশিপ প্রোডাক্ট ক্যাটালগ ও বাল্ক স্টক কাউন্ট',
+      'সাপ্লায়ার পারচেজ, পেমেন্ট ও কাস্টমার বাকির খাতা',
+      'চালান জেনারেশন ও থার্মাল/A4 ইনভয়েস প্রিন্টিং',
+      'দৈনিক, মাসিক ও বাৎসরিক লাভ-ক্ষতির পূর্ণ হিসাব'
     ],
-    techStack: ['Google Apps Script', 'Google Sheets DB', 'JavaScript ES6'],
-    bestFor: ['ব্যাটারি শপ ও ডিলারশিপ', 'আইপিএস ও সোলার শোরুম', 'অটোমোবাইল ও মোটর পার্টস স্টোর'],
+    techStack: ['Google Apps Script', 'Google Sheets DB', 'HTML5/Tailwind', 'Secure API'],
+    bestFor: ['ডিলারশিপ ও ডিস্ট্রিবিউটর', 'পাইকারি বাণিজ্যিক প্রতিষ্ঠান', 'উৎপাদন ও সাপ্লাই এজেন্সি'],
     previewTheme: {
-      badgeColor: 'border-blue-500/40 text-blue-300 bg-blue-950/60',
-      accentColor: 'text-blue-400',
-      btnClass: 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white shadow-blue-500/25',
-      icon: 'BatteryCharging',
+      badgeColor: 'border-amber-500/40 text-amber-300 bg-amber-950/60',
+      accentColor: 'text-amber-400',
+      btnClass: 'bg-gradient-to-r from-amber-400 to-yellow-400 text-slate-950 shadow-amber-500/25',
+      icon: 'Truck',
+    }
+  },
+  {
+    id: 'electronic-hardware-shop',
+    name: 'Electronic Hardware Shop System',
+    category: 'ইলেকট্রনিক্স ও হার্ডওয়্যার পিওএস',
+    categoryEn: 'Electronics & Hardware Retail POS',
+    tagline: 'ইলেকট্রনিক্স, পার্টস, সিরিয়াল ও ওয়ারেন্টি ট্র্যাকিং ভিত্তিক কমপ্লিট রিটেইল সফটওয়্যার',
+    description: 'ইলেকট্রনিক্স শোরুম, হার্ডওয়্যার, স্যানিটারি ও ইলেকট্রিক ইকুইপমেন্টের জন্য বিশেষায়িত সিস্টেম। সিরিয়াল নম্বর ট্র্যাকিং, দ্রুত বারকোড ক্যাশ মেমো ও কাস্টমার বাকির খাতা।',
+    demoUrl: 'https://script.google.com/macros/s/AKfycbzO5c7E9kI7DIFOpQ8pJFIbMolVvnmf2Gh2QZz7RwPKC8KKVnApKL5NA_0FIqWjrjJQ/exec',
+    requiresAuth: true,
+    credentials: {
+      usernameLabel: 'User',
+      username: 'admin',
+      passwordLabel: 'Password',
+      password: 'Random@#$12345',
+    },
+    features: [
+      'সিরিয়াল নম্বর ও ওয়ারেন্টি পিরিয়ড ট্র্যাকিং',
+      'ইনস্ট্যান্ট বারকোড স্ক্যানিং ও ক্যাশ মেমো প্রিন্ট',
+      'হার্ডওয়্যার ক্যাটাগরি ও লো-স্টক নোটিফিকেশন',
+      'কাস্টমার ডিউ খাতা ও পেমেন্ট রিসিভ হিস্ট্রি'
+    ],
+    techStack: ['Google Apps Script', 'Google Sheets DB', 'JavaScript ES6', 'Modern CSS3'],
+    bestFor: ['ইলেকট্রনিক্স শোরুম ও দোকান', 'হার্ডওয়্যার ও স্যানিটারি শপ', 'মোটর পার্টস ও ইলেকট্রিক স্টোর'],
+    previewTheme: {
+      badgeColor: 'border-cyan-500/40 text-cyan-300 bg-cyan-950/60',
+      accentColor: 'text-cyan-400',
+      btnClass: 'bg-gradient-to-r from-cyan-400 to-blue-500 text-slate-950 shadow-cyan-500/25',
+      icon: 'Cpu',
+    }
+  },
+  {
+    id: 'traders-pos-system',
+    name: 'ট্রেডার্স POS System',
+    category: 'ট্রেডার্স ও হোলসেল-রিটেইল পিওএস',
+    categoryEn: 'Traders Wholesale & Retail POS',
+    tagline: 'সাধারণ ট্রেডিং ও বাণিজ্যিক প্রতিষ্ঠানের জন্য হাই-স্পিড বিলিং ও লেজার সিস্টেম',
+    description: 'যেকোনো পাইকারি ও খুচরা ট্রেডিং বিজনেসের জন্য নির্ভরযোগ্য গুগল অ্যাপস স্ক্রিপ্ট অ্যাপ্লিকেশন। দ্রুত বিলিং, নগদ ও বাকির আলাদা খাতা এবং স্প্রেডশিট ডাটাবেস।',
+    demoUrl: 'https://script.google.com/macros/s/AKfycbzwstAmVU0s5DFKt22tICz9_lJy7irNu-6MToj7N8bCwxWDwAC2j-Mwlk7H57nJM302cQ/exec',
+    requiresAuth: true,
+    credentials: {
+      usernameLabel: 'User',
+      username: 'admin',
+      passwordLabel: 'Password',
+      password: 'Random@#$12345',
+    },
+    features: [
+      'খুচরা ও পাইকারি ডাবল রেট প্রাইসিং সাপোর্ট',
+      '১-ক্লিকে কাস্টমার রসিদ ও ইনভয়েস প্রিন্ট',
+      'দৈনিক ক্রয়-বিক্রয় ও লাভ-ক্ষতির ব্যালেন্স শিট',
+      'মোবাইল ও পিসিতে সমান গতিতে ব্যবহারের সুবিধা'
+    ],
+    techStack: ['Google Apps Script', 'Google Sheets DB', 'Vanilla JS', 'Tailwind'],
+    bestFor: ['জেনারেল ট্রেডার্স ও মার্চেন্ট', 'মুদি ও জেনারেল ডিপার্টমেন্টাল স্টোর', 'পাইকারি বাণিজ্যিক আড়ত'],
+    previewTheme: {
+      badgeColor: 'border-emerald-500/40 text-emerald-300 bg-emerald-950/60',
+      accentColor: 'text-emerald-400',
+      btnClass: 'bg-gradient-to-r from-emerald-400 to-teal-400 text-slate-950 shadow-emerald-500/25',
+      icon: 'Store',
+    }
+  },
+  {
+    id: 'fashion-store-pos',
+    name: 'Fashion Store POS',
+    category: 'ফ্যাশন শপ, গার্মেন্টস ও ক্লথিং রিটেইল',
+    categoryEn: 'Fashion Apparel & Boutique POS',
+    tagline: 'পোশাকের সাইজ, কালার ভ্যারিয়েন্ট ও বারকোড ভিত্তিক অটোমেটেড বিলিং সফটওয়্যার',
+    description: 'পোশাকের শোরুম, গার্মেন্টস রিটেইল ও বুটিকের জন্য সম্পূর্ণ সমাধান। সাইজ ও কালার ভ্যারিয়েন্ট স্টক ট্র্যাকিং, বারকোড রিডার সাপোর্ট, ডিসকাউন্ট ও থার্মাল প্রিন্ট।',
+    demoUrl: 'https://script.google.com/macros/s/AKfycbwbssamVW7Jp21R1w4g2fvgJe8jNISSKdsggM_FxjA1DWfmzwkgfG1epGBoYM-3OoOn/exec',
+    requiresAuth: true,
+    credentials: {
+      usernameLabel: 'User',
+      username: 'admin',
+      passwordLabel: 'Password',
+      password: 'Random@#$12345',
+    },
+    features: [
+      'সাইজ (S, M, L, XL, XXL) ও কালার ভ্যারিয়েন্ট ট্র্যাকিং',
+      'ইনস্ট্যান্ট বারকোড স্ক্যান ও দ্রুত ক্যাশ মেমো',
+      'কাস্টমার বাকির খাতা ও এসএমএস ইনভয়েস সুবিধা',
+      'থার্মাল রসিদ প্রিন্টার (58mm/80mm) অটো সাপোর্ট'
+    ],
+    techStack: ['Google Apps Script', 'Google Sheets DB', 'HTML5/Tailwind', 'Secure API'],
+    bestFor: ['গার্মেন্টস ও পোশাক শোরুম', 'লেডিস ও জেন্টস বুটিক', 'জুতা ও ফ্যাশন এক্সেসরিজ শপ'],
+    previewTheme: {
+      badgeColor: 'border-purple-500/40 text-purple-300 bg-purple-950/60',
+      accentColor: 'text-purple-400',
+      btnClass: 'bg-gradient-to-r from-purple-400 to-indigo-400 text-slate-950 shadow-purple-500/25',
+      icon: 'Shirt',
     }
   }
 ];

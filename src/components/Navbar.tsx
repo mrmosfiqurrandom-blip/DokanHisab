@@ -76,7 +76,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenOrderModal, onNavigate, ac
               <span className={`text-[10px] px-1.5 py-0.2 rounded font-mono font-bold ${
                 activeView === 'demos' ? 'bg-slate-950 text-emerald-300' : 'bg-emerald-950 text-emerald-300 border border-emerald-700/50'
               }`}>
-                ৫টি লাইভ
+                ৪টি লাইভ
               </span>
             </button>
           </nav>
