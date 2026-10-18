@@ -5,8 +5,7 @@ import {
   ExternalLink, 
   Copy, 
   Check, 
-  ArrowRight, 
-  CheckCircle2
+  ArrowRight
 } from 'lucide-react';
 import { DEMO_APPS } from '../data/appsData';
 
@@ -15,27 +14,23 @@ interface HeroImageSliderProps {
   onViewAllDemos: () => void;
 }
 
-// Clean, realistic photography tailored for each retail / distribution domain
-const SLIDE_IMAGES: Record<string, { image: string; imageAlt: string; highlights: string[] }> = {
+// Crisp, high-clarity photography tailored to each business type
+const SLIDE_IMAGES: Record<string, { image: string; imageAlt: string }> = {
   'dealership-management-system': {
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=80',
-    imageAlt: 'Dealership & Logistics Warehouse Distribution',
-    highlights: ['গুগল শিট ডাটাবেস', 'চালান ও স্টক লেজার', 'ডিলার বাকি ও ক্যাশ']
+    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1600&q=85',
+    imageAlt: 'Dealership & Logistics Warehouse Distribution'
   },
   'electronic-hardware-shop': {
-    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=80',
-    imageAlt: 'Electronics & Hardware Tools Shop Counter',
-    highlights: ['সিরিয়াল নম্বর ও ওয়ারেন্টি', 'বারকোড রিডার সাপোর্ট', 'ক্যাশ মেমো প্রিন্ট']
+    image: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1600&q=85',
+    imageAlt: 'Electronics & Hardware Tools Shop Counter'
   },
   'traders-pos-system': {
-    image: 'https://images.unsplash.com/photo-1556742049-0a67e55722c3?auto=format&fit=crop&w=1600&q=80',
-    imageAlt: 'Retail & Wholesale Traders Billing Counter',
-    highlights: ['খুচরা ও পাইকারি ডাবল রেট', 'থার্মাল রসিদ প্রিন্ট', 'দৈনিক লাভ-ক্ষতির খাতা']
+    image: 'https://images.unsplash.com/photo-1556742049-0a67e55722c3?auto=format&fit=crop&w=1600&q=85',
+    imageAlt: 'Retail & Wholesale Traders Billing Counter'
   },
   'fashion-store-pos': {
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=80',
-    imageAlt: 'Modern Fashion Boutique & Clothing Store',
-    highlights: ['সাইজ ও কালার ভ্যারিয়েন্ট', 'ডিসকাউন্ট ভাউচার হিসাব', 'বারকোড ও সেলস লেজার']
+    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85',
+    imageAlt: 'Modern Fashion Boutique & Clothing Store'
   }
 };
 
@@ -50,13 +45,6 @@ export const HeroImageSlider: React.FC<HeroImageSliderProps> = ({
   // Touch swipe support for mobile
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
-
-  const currentApp = DEMO_APPS[currentIndex];
-  const slideMeta = SLIDE_IMAGES[currentApp.id] || {
-    image: 'https://images.unsplash.com/photo-1556742049-0a67e55722c3?auto=format&fit=crop&w=1600&q=80',
-    imageAlt: currentApp.name,
-    highlights: currentApp.features.slice(0, 3)
-  };
 
   // Autoplay slider every 6 seconds, pause on hover
   useEffect(() => {
@@ -75,7 +63,6 @@ export const HeroImageSlider: React.FC<HeroImageSliderProps> = ({
     setCurrentIndex((prev) => (prev - 1 + DEMO_APPS.length) % DEMO_APPS.length);
   };
 
-  // Mobile Touch Swipe Handlers
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.targetTouches[0].clientX;
   };
@@ -88,9 +75,9 @@ export const HeroImageSlider: React.FC<HeroImageSliderProps> = ({
     if (!touchStartX.current || !touchEndX.current) return;
     const diff = touchStartX.current - touchEndX.current;
     if (diff > 50) {
-      handleNext(); // swiped left
+      handleNext();
     } else if (diff < -50) {
-      handlePrev(); // swiped right
+      handlePrev();
     }
     touchStartX.current = null;
     touchEndX.current = null;
@@ -104,162 +91,176 @@ export const HeroImageSlider: React.FC<HeroImageSliderProps> = ({
 
   return (
     <div 
-      className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-800 bg-slate-900 shadow-2xl transition-all select-none"
+      className="relative w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-800 bg-slate-950 shadow-2xl select-none"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      {/* Background Image Container */}
-      <div className="relative min-h-[400px] sm:min-h-[480px] md:min-h-[520px] flex items-center">
-        {/* Crisp Photo */}
-        <img
-          src={slideMeta.image}
-          alt={slideMeta.imageAlt}
-          className="absolute inset-0 w-full h-full object-cover object-center filter brightness-40 transition-opacity duration-700"
-          loading="eager"
-        />
+      {/* 
+        ROCK-SOLID FIXED HEIGHT CONTAINER: 
+        Uses fixed responsive height (h-[440px] sm:h-[460px] md:h-[480px]) so height NEVER changes when switching slides 
+      */}
+      <div className="relative w-full h-[450px] sm:h-[460px] md:h-[480px] overflow-hidden">
+        {DEMO_APPS.map((app, idx) => {
+          const isActive = idx === currentIndex;
+          const slideMeta = SLIDE_IMAGES[app.id] || {
+            image: 'https://images.unsplash.com/photo-1556742049-0a67e55722c3?auto=format&fit=crop&w=1600&q=85',
+            imageAlt: app.name
+          };
 
-        {/* Minimal clean gradient overlays for 100% text readability */}
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-transparent to-slate-950/70" />
+          return (
+            <div
+              key={app.id}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-600 ease-in-out ${
+                isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
+              }`}
+            >
+              {/* Crisp background image without heavy muddy blurs */}
+              <img
+                src={slideMeta.image}
+                alt={slideMeta.imageAlt}
+                className="absolute inset-0 w-full h-full object-cover object-center"
+                loading={idx === 0 ? 'eager' : 'lazy'}
+              />
 
-        {/* Slide Content (Fully Mobile Responsive) */}
-        <div className="relative z-10 w-full p-4 sm:p-8 md:p-12 max-w-3xl">
-          {/* Badge & Step indicator */}
-          <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-            <span className="px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold bg-amber-400/20 text-amber-300 border border-amber-400/40">
-              {currentApp.category}
-            </span>
-            <span className="text-[11px] sm:text-xs font-mono font-bold text-slate-400">
-              {currentIndex + 1} / {DEMO_APPS.length}
-            </span>
-          </div>
+              {/* Clean, high-contrast dark gradient overlay for sharp, readable text */}
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/75 to-slate-950/45" />
 
-          {/* Title */}
-          <h2 className="text-xl sm:text-3xl md:text-5xl font-black text-white leading-tight">
-            {currentApp.name}
-          </h2>
+              {/* Centered slide content: Clean, Minimal, Non-busy */}
+              <div className="relative z-10 w-full h-full px-4 sm:px-8 py-6 flex flex-col items-center justify-center text-center">
+                
+                {/* Minimal Category & Counter Tag */}
+                <div className="flex items-center justify-center gap-2 mb-3">
+                  <span className="text-[11px] sm:text-xs font-bold tracking-wider uppercase text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 px-3 py-1 rounded-full">
+                    {app.category}
+                  </span>
+                  <span className="text-[11px] sm:text-xs font-mono font-medium text-slate-400 bg-slate-900/80 border border-slate-700/60 px-2 py-0.5 rounded-full">
+                    {idx + 1}/{DEMO_APPS.length}
+                  </span>
+                </div>
 
-          {/* Subtitle / Tagline */}
-          <p className="mt-1.5 sm:mt-3 text-xs sm:text-base text-slate-200 font-medium leading-relaxed max-w-2xl line-clamp-2 sm:line-clamp-none">
-            {currentApp.tagline}
-          </p>
+                {/* Main Title - Clean & Sharp */}
+                <h2 className="text-2xl sm:text-3xl md:text-5xl font-black text-white tracking-tight max-w-3xl leading-tight">
+                  {app.name}
+                </h2>
 
-          {/* Key highlights (wrap nicely on mobile) */}
-          <div className="mt-3 sm:mt-4 flex flex-wrap gap-1.5 sm:gap-2">
-            {slideMeta.highlights.map((item, idx) => (
-              <span 
-                key={idx}
-                className="inline-flex items-center gap-1 sm:gap-1.5 px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-md sm:rounded-lg bg-slate-900/90 border border-slate-700/80 text-[10px] sm:text-xs font-medium text-slate-200"
-              >
-                <CheckCircle2 className="w-3 h-3 text-emerald-400 shrink-0" />
-                <span>{item}</span>
-              </span>
-            ))}
-          </div>
+                {/* Subtitle / Tagline - Clean & Concise */}
+                <p className="mt-2.5 sm:mt-3 text-xs sm:text-base text-slate-300 font-normal max-w-xl line-clamp-2 leading-relaxed">
+                  {app.tagline}
+                </p>
 
-          {/* Credentials Box (Mobile-optimised) */}
-          <div className="mt-4 p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-slate-950/95 border border-slate-800 inline-flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] sm:text-xs">
-            <span className="text-slate-400 font-bold hidden xs:inline">ডেমো লগইন:</span>
-            <div className="flex items-center gap-1">
-              <span className="text-slate-500">ইউজার:</span>
-              <code className="text-emerald-400 font-mono font-bold">{currentApp.credentials.username}</code>
+                {/* Minimal Login Credentials - Single compact clean strip */}
+                <div className="mt-4 px-3.5 py-1.5 rounded-xl bg-slate-900/90 border border-slate-700/80 inline-flex items-center gap-2 sm:gap-3 text-xs shadow-md">
+                  <span className="text-slate-400 font-medium">ডেমো লগইন:</span>
+                  <div className="flex items-center gap-1 font-mono">
+                    <span className="text-slate-500">ইউজার:</span>
+                    <span className="text-emerald-400 font-bold">{app.credentials.username}</span>
+                  </div>
+                  <span className="text-slate-600">|</span>
+                  <div className="flex items-center gap-1 font-mono">
+                    <span className="text-slate-500">পাস:</span>
+                    <span className="text-amber-300 font-bold">{app.credentials.password}</span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleCopyCredentials(app.credentials.password, app.id)}
+                    className="ml-1 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer inline-flex items-center gap-1 text-[11px]"
+                    title="পাসওয়ার্ড কপি করুন"
+                  >
+                    {copiedKey === app.id ? (
+                      <>
+                        <Check className="w-3 h-3 text-emerald-400" />
+                        <span className="text-emerald-400 font-bold">কপি হয়েছে</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3 h-3 text-slate-400" />
+                        <span>কপি</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Clean, Sharp Action Buttons */}
+                <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                  <a
+                    href={app.demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto py-2.5 sm:py-3 px-6 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20 active:scale-95"
+                  >
+                    <span>সরাসরি লাইভ ডেমো দেখুন</span>
+                    <ExternalLink className="w-4 h-4" />
+                  </a>
+
+                  <button
+                    type="button"
+                    onClick={() => onSelectAppForOrder(app.id)}
+                    className="w-full sm:w-auto py-2.5 sm:py-3 px-6 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95"
+                  >
+                    <span>প্যাকেজ অর্ডার করুন</span>
+                    <ArrowRight className="w-4 h-4 text-emerald-400" />
+                  </button>
+                </div>
+
+              </div>
             </div>
-            <span className="text-slate-700">|</span>
-            <div className="flex items-center gap-1">
-              <span className="text-slate-500">পাসওয়ার্ড:</span>
-              <code className="text-amber-300 font-mono font-bold">{currentApp.credentials.password}</code>
-            </div>
-            <button
-              onClick={() => handleCopyCredentials(currentApp.credentials.password, currentApp.id)}
-              className="ml-auto xs:ml-1 px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition-colors cursor-pointer flex items-center gap-1 text-[10px] sm:text-[11px]"
-              title="পাসওয়ার্ড কপি করুন"
-            >
-              {copiedKey === currentApp.id ? (
-                <>
-                  <Check className="w-3 h-3 text-emerald-400" />
-                  <span className="text-emerald-400 font-bold">কপি</span>
-                </>
-              ) : (
-                <>
-                  <Copy className="w-3 h-3" />
-                  <span>কপি</span>
-                </>
-              )}
-            </button>
-          </div>
+          );
+        })}
 
-          {/* Action Buttons: Responsive for Mobile */}
-          <div className="mt-5 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
-            <a
-              href={currentApp.demoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-2.5 sm:py-3 px-4 sm:px-5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-lg shadow-emerald-500/20 active:scale-95"
-            >
-              <span>সরাসরি ডেমো টেস্ট করুন</span>
-              <ExternalLink className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </a>
-
-            <button
-              onClick={() => onSelectAppForOrder(currentApp.id)}
-              className="py-2.5 sm:py-3 px-4 sm:px-5 rounded-xl bg-slate-900 hover:bg-slate-800 text-amber-300 border border-slate-700 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer active:scale-95"
-            >
-              <span>এই সফটওয়্যারটি কিনুন</span>
-              <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            </button>
-          </div>
-        </div>
-
-        {/* Previous & Next Navigation Arrows (Clean & Touch friendly) */}
+        {/* Previous & Next Navigation Arrows (Clean & Minimal) */}
         <button
+          type="button"
           onClick={handlePrev}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950/80 hover:bg-slate-900 border border-slate-700 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg z-20 active:scale-95"
+          className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-950/70 hover:bg-slate-900 border border-slate-700/80 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg z-20 active:scale-95"
           aria-label="Previous Slide"
         >
-          <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ChevronLeft className="w-5 h-5" />
         </button>
 
         <button
+          type="button"
           onClick={handleNext}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-slate-950/80 hover:bg-slate-900 border border-slate-700 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg z-20 active:scale-95"
+          className="absolute right-3 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-slate-950/70 hover:bg-slate-900 border border-slate-700/80 text-white flex items-center justify-center transition-all cursor-pointer shadow-lg z-20 active:scale-95"
           aria-label="Next Slide"
         >
-          <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
+          <ChevronRight className="w-5 h-5" />
         </button>
       </div>
 
-      {/* Minimal Bottom Bar: Dots & Category Tabs */}
-      <div className="px-3 sm:px-4 py-2.5 sm:py-3 bg-slate-950 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-xs">
-        {/* Dot indicators */}
+      {/* Clean & Minimal Bottom Bar */}
+      <div className="px-4 py-2.5 bg-slate-950 border-t border-slate-800 flex items-center justify-between text-xs">
+        {/* Dot Indicators */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           {DEMO_APPS.map((app, idx) => (
             <button
               key={app.id}
+              type="button"
               onClick={() => setCurrentIndex(idx)}
               className={`h-2 rounded-full transition-all cursor-pointer ${
                 idx === currentIndex
-                  ? 'w-6 sm:w-8 bg-emerald-400'
+                  ? 'w-6 bg-emerald-400'
                   : 'w-2 bg-slate-700 hover:bg-slate-500'
               }`}
               title={app.name}
-              aria-label={`Go to slide ${idx + 1}`}
+              aria-label={`Slide ${idx + 1}`}
             />
           ))}
         </div>
 
-        {/* Quick App Selectors */}
-        <div className="flex items-center gap-1 overflow-x-auto no-scrollbar py-0.5">
+        {/* Simple Text Tabs */}
+        <div className="flex items-center gap-1 sm:gap-2">
           {DEMO_APPS.map((app, idx) => (
             <button
               key={app.id}
+              type="button"
               onClick={() => setCurrentIndex(idx)}
-              className={`px-2 sm:px-2.5 py-1 rounded-md text-[10px] sm:text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
+              className={`px-2.5 py-1 rounded text-[11px] font-medium transition-colors cursor-pointer ${
                 idx === currentIndex
-                  ? 'bg-slate-800 text-white border border-slate-600'
-                  : 'text-slate-400 hover:text-slate-200'
+                  ? 'text-emerald-400 font-bold bg-emerald-950/60'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               {app.name.split(' ')[0]}
@@ -267,12 +268,13 @@ export const HeroImageSlider: React.FC<HeroImageSliderProps> = ({
           ))}
         </div>
 
-        {/* View All Demos Link */}
+        {/* All Demos Link */}
         <button
+          type="button"
           onClick={onViewAllDemos}
-          className="text-[11px] sm:text-xs font-bold text-amber-400 hover:text-amber-300 transition-colors cursor-pointer hidden md:inline"
+          className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 transition-colors cursor-pointer hidden sm:inline"
         >
-          সব প্রজেক্ট দেখুন →
+          সব প্রজেক্ট →
         </button>
       </div>
     </div>

@@ -4,7 +4,7 @@ import { SITE_CONFIG } from '../data/siteConfig';
 
 export const FloatingWhatsApp: React.FC = () => {
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex items-center gap-2 group">
+    <div className="no-print fixed bottom-6 right-6 z-50 flex items-center gap-2 group">
       {/* Tooltip on hover */}
       <div className="hidden sm:block opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-700 shadow-xl whitespace-nowrap">
         <span>সরাসরি হোয়াটসঅ্যাপে কথা বলুন</span>

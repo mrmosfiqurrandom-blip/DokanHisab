@@ -86,18 +86,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal, onViewDemos }) => 
           />
         </div>
 
-        {/* 3 CORE SERVICES & PACKAGES (Clean, Minimal, Highly Readable) */}
+        {/* 3 CORE SERVICES & PACKAGES (Clean, Minimal, Centered, Transparent) */}
         <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-1 mb-5 px-1">
-            <div>
-              <span className="text-[11px] sm:text-xs font-bold text-amber-400 uppercase tracking-wider block">
-                সার্ভিস প্যাকেজ
-              </span>
-              <h2 className="text-lg sm:text-2xl font-black text-white mt-0.5">
-                আপনার প্রয়োজন অনুযায়ী প্যাকেজ বেছে নিন
-              </h2>
-            </div>
-            <p className="text-xs text-slate-400 font-medium">
+          <div className="text-center max-w-2xl mx-auto mb-8 px-2">
+            <span className="text-[11px] sm:text-xs font-bold text-amber-400 uppercase tracking-wider block mb-1">
+              সার্ভিস প্যাকেজ
+            </span>
+            <h2 className="text-xl sm:text-3xl font-black text-white">
+              আপনার প্রয়োজন অনুযায়ী প্যাকেজ বেছে নিন
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 font-medium mt-1.5">
               বিকাশ পার্সোনাল নাম্বারে পেমেন্ট করে সরাসরি গুগল ড্রাইভ এক্সেস নিন
             </p>
           </div>
@@ -110,8 +108,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenOrderModal, onViewDemos }) => 
                   key={srv.id}
                   className={`relative rounded-2xl sm:rounded-3xl p-5 sm:p-6 flex flex-col justify-between transition-all ${
                     srv.isPopular
-                      ? 'border-2 border-emerald-500 bg-gradient-to-b from-emerald-950/30 via-slate-900 to-slate-900 shadow-xl shadow-emerald-500/10 md:-translate-y-1'
-                      : 'border border-slate-800 bg-slate-900/90 shadow-md'
+                      ? 'border-2 border-emerald-500 bg-slate-900/90 shadow-xl shadow-emerald-500/10 md:-translate-y-1'
+                      : 'border border-slate-800 bg-slate-900/60 shadow-md hover:border-slate-700'
                   }`}
                 >
                   <div>

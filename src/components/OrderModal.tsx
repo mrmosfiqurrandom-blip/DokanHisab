@@ -18,6 +18,7 @@ import {
 import { PRICING_PACKAGES } from '../data/packagesData';
 import { DEMO_APPS } from '../data/appsData';
 import { SITE_CONFIG } from '../data/siteConfig';
+import { ReceiptInvoice, ReceiptData } from './ReceiptInvoice';
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -342,25 +343,27 @@ ${notes ? `• বিশেষ চাহিদা/নোট: ${notes}` : ''}
             )}
           </div>
 
-          {/* Slip view */}
+          {/* Modern 1-Page Slip view */}
           {showSlip && (
-            <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-slate-200">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-2 mb-3">
-                <span className="font-black text-sm text-amber-300">অর্ডার ইনভয়েস স্লিপ #{orderNumber}</span>
-                <button
-                  type="button"
-                  onClick={handlePrintSlip}
-                  className="inline-flex items-center gap-1 px-3 py-1 text-xs bg-amber-400 text-slate-950 rounded-lg font-black cursor-pointer"
-                >
-                  <Printer className="w-3.5 h-3.5" /> প্রিন্ট স্লিপ
-                </button>
-              </div>
-              <div className="text-xs space-y-1 font-medium">
-                <p><strong>ক্লায়েন্ট:</strong> {clientName || 'নাম উল্লেখ নেই'} ({shopName || 'দোকান উল্লেখ নেই'})</p>
-                <p><strong>মোবাইল:</strong> {phone || 'নম্বর উল্লেখ নেই'}</p>
-                <p><strong>প্যাকেজ:</strong> {currentPackage.nameBn} - {currentPackage.priceFormatted}</p>
-                <p><strong>সফটওয়্যার:</strong> {appDisplayName}</p>
-              </div>
+            <div className="mt-4">
+              <ReceiptInvoice
+                data={{
+                  invoiceNumber: orderNumber,
+                  orderDate: new Intl.DateTimeFormat('bn-BD', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date()),
+                  clientName: clientName || 'সম্মানিত ক্লায়েন্ট',
+                  shopName: shopName || 'দোকান উল্লেখ নেই',
+                  clientEmail: 'অনুরোধক্রমে ড্রাইভ শেয়ার',
+                  clientPhone: phone || 'নম্বর উল্লেখ নেই',
+                  senderNumber: phone || 'বিকাশ সেন্ড মানি',
+                  trxId: 'যাচাই প্রক্রিয়াধীন (Pending)',
+                  packageName: currentPackage.nameBn,
+                  packagePrice: currentPackage.priceFormatted,
+                  packagePriceBdt: currentPackage.priceBdt,
+                  appName: appDisplayName,
+                  appCategory: selectedAppObj?.category || 'ইনভেন্টরি ও পিওএস'
+                }}
+                onPrint={handlePrintSlip}
+              />
             </div>
           )}
         </div>
